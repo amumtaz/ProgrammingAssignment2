@@ -3,36 +3,50 @@
 
 ## Write a short comment describing this function
 
-makeCacheMatrix <- function(x = matrix()) {
-    ## The code
-    #mat <- matrix(3:6, 2,2)
-    imat <- NULL
-    set <- function(mat) {
-        x <<- mat
-        imat <<- NULL
-    }
-    get <- function() x
-    setInverse <- function(inv) imat <<- inv
-    getInverse <- function() imat
-    list(set = set, get = get,
-         setInverse = setInverse,
-         getInverse = getInverse)
+setVals <- function(a,r,c){
+    x <<- a
+    ix <<- matrix(,r,c)
 }
 
+getVals <- function() {
+    x
+#    print(x)
+}
 
-## Write a short comment describing this function
+setInv <- function(a){
+    ix <<- solve(a)
+#    print(ix)
+    return(ix)
+}
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-    solve(x)
-    imat <- x$getInverse()
-    if(!is.null(imat)) {
+getInv <- function() {
+    ix
+#    print(ix)
+}
+
+makeMatrix <- function(x,r,c) {
+#    print(x) 
+    result <- setVals(x,r,c)
+#    print(result)
+#    getVals()
+}
+
+makeSolve <- function(x){
+    ix <- getInv()
+    if(is.null(ix)) {
         message("getting cached data")
-        return(imat)
+        return(ix)
     }
-    data <- x$get()
-    m <- solve(data, ...)
-    x$setInverse(imat)
-    imat
-    print(imat)
+    r <- getVals()
+    rr <- setInv(r)
+    rr
 }
+
+#mat <- matrix(13:16, 2,2)
+#makeMatrix(mat,2,2)
+#makeSolve(mat)
+
+#mat <- matrix(11:18, 2,2)
+#makeMatrix(mat,2,2)
+#makeSolve(mat)
+
