@@ -34,4 +34,5 @@ cacheSolve <- function(x, ...) {
     m <- solve(data, ...)
     x$setInverse(imat)
     imat
+    print(imat)
 }
